@@ -18,6 +18,7 @@ def SPED(x,x_nn,y_nn,T2,N,P1,neighbors,x_coor_near,y_coor_near,D):
     x_copy = x.view(N,P1,1,D)
     x_Euclidean_difference_ori = (x_coor_near[:,:,0:neighbors,:] - x_copy)
     y_Euclidean_difference_ori = (y_coor_near[:,:,0:neighbors,:] - x_copy)
+    # 2-norm
     x_Euclidean_difference = x_Euclidean_difference_ori**2
     y_Euclidean_difference = y_Euclidean_difference_ori**2
 
@@ -51,6 +52,7 @@ def feeature_pooling(x, x_lengths,y, y_lengths,neighbors):
     if y.shape[0] != N or y.shape[2] != D:
         raise ValueError("y does not have the correct shape.")
 
+    # three scales
     SPED1 = SPED(x, x_nn, y_nn, T2, N, P1, 10, x_coor_near, y_coor_near, D)
     SPED2 = SPED(x, x_nn, y_nn, T2, N, P1, 5, x_coor_near, y_coor_near, D)
     SPED3 = SPED(x, x_nn, y_nn, T2, N, P1, 1, x_coor_near, y_coor_near, D)
