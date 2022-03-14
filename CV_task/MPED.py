@@ -27,8 +27,9 @@ def SPED(x,x_nn,y_nn,T2,N,P1,neighbors,x_coor_near,y_coor_near,D):
 
     energy_x = torch.sum(Graph_mess_x_near, dim=3)
     energy_y = torch.sum(Graph_mess_y_near, dim=3)
-    dis_energy = (energy_x - energy_y).abs()  # (batch,P1,D) 50,2048,3
-    dis_energy = dis_energy.sum(dim=2) #batch,P1
+    energy_x = torch.sum(energy_x,dim = 2)
+    energy_y = torch.sum(energy_y,dim = 2)
+    dis_energy = (energy_x - energy_y).abs()  
     dis_energy = dis_energy.sum(dim=1) #batch
     return dis_energy
 def feeature_pooling(x, x_lengths,y, y_lengths,neighbors):
