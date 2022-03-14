@@ -41,14 +41,14 @@ else
     g_target = 1./(1+exp(-dis_square_target./sigma_r));
 end
 center_mass_rep = reshape(repmat(center_mass(:)',k,[]),[],3);
-source_mass_dif = abs(neighbor_source_mass-center_mass_rep)+1;
-target_mass_dif = abs(neighbor_target_mass-center_mass_rep)+1;
+source_mass_dif = abs(neighbor_source_mass-center_mass_rep);
+target_mass_dif = abs(neighbor_target_mass-center_mass_rep);
 if color_type == 'RGB'
-    source_mass_dif = 1*source_mass_dif(:,1)+2*source_mass_dif(:,2)+1*source_mass_dif(:,3);
-    target_mass_dif = 1*target_mass_dif(:,1)+2*target_mass_dif(:,2)+1*target_mass_dif(:,3);
+    source_mass_dif = 1*source_mass_dif(:,1)+2*source_mass_dif(:,2)+1*source_mass_dif(:,3)+1;
+    target_mass_dif = 1*target_mass_dif(:,1)+2*target_mass_dif(:,2)+1*target_mass_dif(:,3)+1;
 elseif color_type == 'GCM'|color_type == 'YUV'
-    source_mass_dif = 6*source_mass_dif(:,1)+1*source_mass_dif(:,2)+1*source_mass_dif(:,3);
-    target_mass_dif = 6*target_mass_dif(:,1)+1*target_mass_dif(:,2)+1*target_mass_dif(:,3);
+    source_mass_dif = 6*source_mass_dif(:,1)+1*source_mass_dif(:,2)+1*source_mass_dif(:,3)+1;
+    target_mass_dif = 6*target_mass_dif(:,1)+1*target_mass_dif(:,2)+1*target_mass_dif(:,3)+1;
 else
     ('Wrong color type! Please use RGB, YUV or GCM!');
 end
