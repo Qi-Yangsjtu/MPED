@@ -4,10 +4,8 @@ from pytorch3d.ops.knn import knn_gather, knn_points
 from pytorch3d.loss.chamfer import _handle_pointcloud_input
 def SPED(x,x_nn,y_nn,T2,N,P1,neighbors,x_coor_near,y_coor_near,D):
     if neighbors>1:
-        sigma = torch.mean(x_nn.dists[:,:,0:neighbors], dim=2)
-        sigma = sigma.view(N, P1, 1)+T2
-        weight_x = 1/(1+torch.exp((-x_nn.dists[:,:,0:neighbors]) / (sigma)))
-        weight_y = 1/(1+torch.exp((-y_nn.dists[:,:,0:neighbors]) / (sigma)))
+        weight_x = 1/torch.sqrt(x_nn.dists[:,:,0:neighbors]+ T2) 
+        weight_y = 1/torch.sqrt(y_nn.dists[:,:,0:neighbors]+ T2)
 
         weight_x = weight_x.reshape(N, P1, neighbors, 1)
         weight_y = weight_y.reshape(N, P1, neighbors, 1)
@@ -40,7 +38,7 @@ def feeature_pooling(x, x_lengths,y, y_lengths,neighbors):
     N, P1, D = x.shape
     P2 = y.shape[1]
     # T = 0.001
-    T2 = 1e-20
+    T2 = 1e-10
     if P1<15 or P2<15:
         raise ValueError("x or y does not have the enough points (at lest 15 points).")
 
