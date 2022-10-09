@@ -11,4 +11,4 @@ The database used in Demo.py comes from LatentNet(https://github.com/optas/laten
 
 If you use our code, please cite our paper:
 
-Yang, Q., Zhang, Y. Chen, S., Xu, Y., Sun, J., & Ma, Z. (2021). MPED: Quantifying Point Cloud Distortion based on Multiscale Potential Energy Discrepancy. arXiv preprint arXiv:2103.02850v4.
+Yang, Q., Zhang, Y., Chen, S., Xu, Y., Sun, J., & Ma, Z. (2021). MPED: Quantifying Point Cloud Distortion based on Multiscale Potential Energy Discrepancy. arXiv preprint arXiv:2103.02850v4.
